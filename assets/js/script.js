@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
-    mouseY = e.clientY + window.scrollY;
+    mouseY = e.clientY;
   });
 
   const lerp = (start, end, factor) => start + (end - start) * factor;
