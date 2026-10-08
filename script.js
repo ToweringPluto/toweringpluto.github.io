@@ -52,4 +52,46 @@ document.addEventListener('DOMContentLoaded', () => {
   if (navLinks.length > 0) {
     navLinks[0].classList.add('active');
   }
+
+  /* ---------- Mouse-responsive background glow ---------- */
+  const glow = document.createElement('div');
+  glow.classList.add('mouse-glow');
+  document.body.appendChild(glow);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY + window.scrollY;
+  });
+
+  const lerp = (start, end, factor) => start + (end - start) * factor;
+
+  const animateGlow = () => {
+    currentX = lerp(currentX, mouseX, 0.1);
+    currentY = lerp(currentY, mouseY, 0.1);
+    glow.style.transform = `translate(${currentX - 600}px, ${currentY - 600}px)`;
+    requestAnimationFrame(animateGlow);
+  };
+
+  requestAnimationFrame(animateGlow);
+
+  /* ---------- Scroll reveal: fade-in-up on enter ---------- */
+  const reveals = document.querySelectorAll('.about-text p, .experience-item, .project-card, .footer');
+
+  reveals.forEach((el) => el.classList.add('reveal'));
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach((el) => revealObserver.observe(el));
 });
