@@ -122,6 +122,32 @@ img {
   border: 0;
 }
 
+/* ---------- Logo ---------- */
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  margin-bottom: var(--spacing-lg);
+  user-select: none;
+}
+
+.logo-s,
+.logo-o {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.logo-s {
+  font-size: 3rem;
+  color: var(--color-text-heading);
+  margin-right: -2px;
+}
+
+.logo-o {
+  font-size: 2.6rem;
+  color: var(--color-accent);
+}
+
 /* ---------- Layout ---------- */
 .site-wrapper {
   max-width: var(--max-width);
