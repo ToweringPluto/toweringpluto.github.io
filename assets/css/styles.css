@@ -497,6 +497,99 @@ img {
   line-height: 1.6;
 }
 
+/* ---------- Photo Stack ---------- */
+.photo-stack {
+  position: relative;
+  height: 180px;
+  margin: var(--spacing-lg) 0 var(--spacing-sm);
+}
+
+.photo-stack-item {
+  position: absolute;
+  left: var(--x, 0%);
+  top: var(--y, 0%);
+  width: 180px;
+  transform: rotate(var(--rotation, 0deg));
+  transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0s;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.photo-stack-item img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+/* Polaroid-style frame */
+.photo-stack-item::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  z-index: -1;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.photo-stack-item:hover {
+  transform: rotate(0deg) scale(1.1);
+  z-index: 10;
+}
+
+.photo-stack-item:hover::before {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(129, 140, 248, 0.25);
+}
+
+/* Drop shadow that lifts on hover */
+.photo-stack-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.4s ease;
+  pointer-events: none;
+}
+
+.photo-stack-item:hover::after {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Mobile: smaller photos, tighter layout */
+@media (max-width: 1023px) {
+  .photo-stack {
+    height: 140px;
+  }
+
+  .photo-stack-item {
+    width: 140px;
+  }
+
+  .photo-stack-item img {
+    height: 120px;
+  }
+}
+
+/* Very small screens: even tighter */
+@media (max-width: 480px) {
+  .photo-stack {
+    height: 110px;
+  }
+
+  .photo-stack-item {
+    width: 110px;
+  }
+
+  .photo-stack-item img {
+    height: 95px;
+  }
+}
+
 /* ---------- Footer ---------- */
 .footer {
   padding: var(--spacing-xl) 0;
